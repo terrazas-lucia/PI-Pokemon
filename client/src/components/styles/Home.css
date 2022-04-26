@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+
+body{
+    background-color: rgb(252, 250, 251);
+}
+.home-box nav{
+    display: inline-flex;
+    justify-content: space-evenly;
+}
+
+.home-box h1{
+    color: pink;
+    display: inline-block;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    padding: 10px;
+}
+
+.home-box .filter {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.home-box .filter h4{
+    margin: 10px;
+    display: inline-flex;
+    color: pink;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+}
+
+.home-box .filter select{
+    display: inline-flex;
+    padding: 7px 40px 7px 12px;
+    border: 1px solid #E8EAED;
+    border-radius: 5px;
+    box-shadow: pink 1px 3px 5px;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.home-box .button-create{
+    background-color:pink ;
+    border: 0;
+    border-radius: 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    padding: 0 1rem;
+    margin-top: 20px;
+    margin-right: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    display: inline-block;
+}
+

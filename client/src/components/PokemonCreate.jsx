@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { postPokemon, getTypes } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
+import './styles/PokemonCreate.css';
 
 function validate(input){
     let errors = {};
@@ -180,70 +181,73 @@ export default function PokemonCreate(){
     }, [dispatch]);
 
     return(
-        <div>
-            <Link to='/home'><button>volver</button></Link>
-            <h1>crea tu kokemon</h1>
-            <form onSubmit={e => {handleSubmit(e)}}>
-                <div>
-                    <label>nombre:</label>
-                    <input type="text" value={input.name} name="name" required onChange={e => {handleChange(e)}}/>
-                    {errors.name && ( <p>{errors.name}</p>)}
+        <div class='create-box'>
+            <h1>¡Crea tu propio pokemon!</h1>
+            <div class='create-form'>
+                <form onSubmit={e => {handleSubmit(e)}}>
+                    <div>
+                        <label>Nombre:</label>
+                        <input type="text" value={input.name} name="name" required onChange={e => {handleChange(e)}}/>
+                        {errors.name && ( <p>{errors.name}</p>)}
+                    </div>
+                    <div>
+                        <label>Vida:</label>
+                        <input type="text" value={input.life} name="life" required onChange={e => {handleChange(e)}}/>
+                        {errors.life && ( <p>{errors.life}</p>)}
+                    </div>
+                    <div>
+                        <label>Ataque:</label>
+                        <input type="text" value={input.attack} name="attack" required onChange={e => {handleChange(e)}}/>
+                        {errors.attack && ( <p>{errors.attack}</p>)}
+                    </div>
+                    <div>
+                        <label>Defensa:</label>
+                        <input type="text" value={input.defense} name="defense" required onChange={e => {handleChange(e)}}/>
+                        {errors.defense && ( <p>{errors.defense}</p>)}
+                    </div>
+                    <div>
+                        <label>Fuerza:</label>
+                        <input type="text" value={input.strength} name="strength" required onChange={e => {handleChange(e)}}/>
+                        {errors.strength && ( <p>{errors.strength}</p>)}
+                    </div>
+                    <div>
+                        <label>Velocidad:</label>
+                        <input type="text" value={input.speed} name="speed" required onChange={e => {handleChange(e)}}/>
+                        {errors.speed && ( <p>{errors.speed}</p>)}
+                    </div>
+                    <div>
+                        <label>Altura:</label>
+                        <input type="text" value={input.height} name="height" required onChange={e => {handleChange(e)}}/>
+                        {errors.height && ( <p>{errors.height}</p>)}
+                    </div>
+                    <div>
+                        <label>Peso:</label>
+                        <input type="text" value={input.weight} name="weight" required onChange={e => {handleChange(e)}}/>
+                        {errors.weight && ( <p>{errors.weight}</p>)}
+                    </div>
+                    <div>
+                        <label>Imagen:</label>
+                        <input type="url" value={input.img} name="img" required onChange={e => {handleChange(e)}}/>
+                        {errors.img && ( <p>{errors.img}</p>)}
+                    </div>
+                    <label>Tipo:</label>
+                    <select onChange={e => {handleSelect(e)}}>
+                        {types.map((t) => {
+                            return(
+                            <option value= {t.name}>{t.name}</option>
+                            )
+                        })}
+                    </select>
+                    <button type='submit'>¡Crear!</button>
+                </form>
+                    {input.type.map(el =>
+                        <div class='type-x'> 
+                            <p>{el}</p>
+                            <button onClick={() => handleDelete(el)}>X</button>
+                        </div> 
+                        )}
                 </div>
-                <div>
-                    <label>vida</label>
-                    <input type="text" value={input.life} name="life" required onChange={e => {handleChange(e)}}/>
-                    {errors.life && ( <p>{errors.life}</p>)}
-                </div>
-                <div>
-                    <label>ataque</label>
-                    <input type="text" value={input.attack} name="attack" required onChange={e => {handleChange(e)}}/>
-                    {errors.attack && ( <p>{errors.attack}</p>)}
-                </div>
-                <div>
-                    <label>defensa</label>
-                    <input type="text" value={input.defense} name="defense" required onChange={e => {handleChange(e)}}/>
-                    {errors.defense && ( <p>{errors.defense}</p>)}
-                </div>
-                <div>
-                    <label>fuerza</label>
-                    <input type="text" value={input.strength} name="strength" required onChange={e => {handleChange(e)}}/>
-                    {errors.strength && ( <p>{errors.strength}</p>)}
-                </div>
-                <div>
-                    <label>velocidad</label>
-                    <input type="text" value={input.speed} name="speed" required onChange={e => {handleChange(e)}}/>
-                    {errors.speed && ( <p>{errors.speed}</p>)}
-                </div>
-                <div>
-                    <label>altura</label>
-                    <input type="text" value={input.height} name="height" required onChange={e => {handleChange(e)}}/>
-                    {errors.height && ( <p>{errors.height}</p>)}
-                </div>
-                <div>
-                    <label>peso</label>
-                    <input type="text" value={input.weight} name="weight" required onChange={e => {handleChange(e)}}/>
-                    {errors.weight && ( <p>{errors.weight}</p>)}
-                </div>
-                <div>
-                    <label>imagen</label>
-                    <input type="url" value={input.img} name="img" required onChange={e => {handleChange(e)}}/>
-                    {errors.img && ( <p>{errors.img}</p>)}
-                </div>
-                <select onChange={e => {handleSelect(e)}}>
-                    {types.map((t) => {
-                        return(
-                        <option value= {t.name}>{t.name}</option>
-                        )
-                    })}
-                </select>
-                <button type='submit'>crear</button>
-            </form>
-                {input.type.map(el =>
-                    <div> 
-                        <p>{el}</p>
-                        <button onClick={() => handleDelete(el)}>x</button>
-                    </div> 
-                    )}
+            <Link to='/home'><button>Volver a la página principal</button></Link>
         </div>
     )
 }

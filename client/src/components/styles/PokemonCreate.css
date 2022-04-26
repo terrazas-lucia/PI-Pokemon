@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+
+body{
+    background-color: rgb(252, 250, 251);
+}
+.create-box{
+    display: inline-block;
+    padding: 50px;
+    border-radius: 15px;  
+    margin: 40px;
+    background-color: white;
+    box-shadow: rgba(75, 13, 31, 0.35) 0px 5px 15px;
+}
+
+.create-box h1{
+    color: pink;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+}
+
+.create-box button{
+    background-color:pink ;
+    border: 0;
+    border-radius: 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+}
+
+.create-form input{
+    width:50%;
+    padding: 5px;
+    margin: 10px;
+    background:none;
+    outline:none;
+    border:0;
+    font-family:"Inter", sans-serif;
+    border-bottom: 1px solid pink;
+}
+
+.create-form label{
+    margin-top: 2px;
+    color: pink;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+}
+
+.create-form select{
+    margin: 20px;
+    padding: 7px 40px 7px 12px;
+    border: 1px solid #E8EAED;
+    border-radius: 5px;
+    box-shadow: pink 1px 3px 5px;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.create-form p{
+    font-family: "Inter", sans-serif;
+    border: 1px solid rgba(241, 6, 6, 0.81);
+    border-radius: 20px;
+    box-shadow: 0px 0px 2px #f50000;
+    color: #d80000;
+    padding: 5px;
+}
+
+.type-x p{
+    display: inline-flex;
+    margin-top: 2px;
+    color: pink;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    border: 0;
+    box-shadow: none;
+}
+
+.type-x button{
+    display: inline-flex;
+    background-color:pink ;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    outline: transparent;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+}

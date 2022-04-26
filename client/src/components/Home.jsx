@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Card from './Card';
 import Pagination from './Pagination';
 import SearchBar from './SearchBar';
+import './styles/Home.css';
 
 
 export default function Home(){
@@ -25,11 +26,6 @@ export default function Home(){
         dispatch(getPokemons()); //lo mismo que hacer mapdispatchtoprops 
     }, [dispatch])
 
-    function handleClick(e){
-        e.preventDefault();
-        dispatch(getPokemons());
-    }
-
     function handleFilterByCreated(e){
         e.preventDefault();
         dispatch(filterCreated(e.target.value));
@@ -46,38 +42,41 @@ export default function Home(){
     }
 
     return(
-        <div>
-            <Link to = '/pokemons'> crear pokemon </Link>
-            <h1> aguante boca </h1>
-            <button onClick={e => {handleClick(e)}}>
-                viva peron y chicago
-            </button>
-            <div>
-                <select onChange={e => handleFilterByCreated(e)}>
-                    <option value='all'>todos</option>
-                    <option value='created'>creados</option>
-                    <option value='api'>existentes</option>
-                </select>
-            </div>
-            <div>
-                <h4>ordenamiento</h4>
-                <select onChange={e => handleFilterAscDesc(e)}>
-                    <option value='asc'> arriba </option> 
-                    <option value='desc'> abajo </option> 
-                    
-                </select>
-                <select onChange={e => handleFilterStrength(e)}>
-                    <option value='strongest'> fuerte </option>
-                    <option value='weakest'> debil </option>
-                </select>
-            </div>
-            <SearchBar/>
-            <Pagination pokemonsPerPage={ pokemonsPerPage } allPokemons={ allPokemons.length } pagination={ pagination }/>
+        <div class="home-box">
+            <nav>
+                <Link to ='/home'><h1> pokeid. </h1></Link>
+                <SearchBar/>
+                <Link to = '/pokemons'><button class="button-create">¡Crea tu propio pokemon!</button></Link>
+                </nav>
+                <div class="filter">
+                    <h4>Filtrar por: </h4>
+                    <div>
+                        <select onChange={e => handleFilterByCreated(e)}>
+                            <option value='all'>Todos los pokemons</option>
+                            <option value='created'>Creados por mi</option>
+                            <option value='api'>Pokemons ya existentes</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h4>Orden alfabetico:</h4>
+                        <select onChange={e => handleFilterAscDesc(e)}>
+                            <option value='asc'> A - Z </option> 
+                            <option value='desc'> Z - A </option> 
+                            
+                        </select>
+                        <h4>Fuerza:</h4>
+                        <select onChange={e => handleFilterStrength(e)}>
+                            <option value='strongest'> Del más fuerte al más debil </option>
+                            <option value='weakest'> Del más debil al más fuerte </option>
+                        </select>
+                    </div>
+                </div>
             { currentPokemon?.map( el => { //se trae el estado global y pregunta si existe y lo mapea y se lo pasa a la card
                 return(
                     <Card id={el.id} name={el.name} img={el.img} type={el.type}/>
                 )
             })}
+            <Pagination pokemonsPerPage={ pokemonsPerPage } allPokemons={ allPokemons.length } pagination={ pagination }/>
         </div>
     )
 }
