@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+
+.landing-box {
+    background-color: #fee3e5;
+    padding: 12px;
+}
+
+.landing-box h1{
+    color: white;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    padding: 10px;
+    text-shadow: rgb(209, 80, 102) 1px 3px 5px;;
+}
+
+.landing-box button{ 
+    position: absolute;
+    margin-left: 290px;
+    background-color:rgb(236, 115, 135) ;
+    border: 0;
+    border-radius: 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+}
+
+.landing-box img{
+    width: 50%;
+}

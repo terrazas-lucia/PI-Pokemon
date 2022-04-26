@@ -234,7 +234,7 @@ export default function PokemonCreate(){
                     <select onChange={e => {handleSelect(e)}}>
                         {types.map((t) => {
                             return(
-                            <option value= {t.name}>{t.name}</option>
+                            <option value= {t.name} >{t.name}</option>
                             )
                         })}
                     </select>

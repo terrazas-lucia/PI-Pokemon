@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
 
-body{
+.home-box {
     background-color: rgb(252, 250, 251);
 }
+
 .home-box nav{
     display: inline-flex;
     justify-content: space-evenly;

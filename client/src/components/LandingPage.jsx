@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './styles/LandingPage.css';
+import imgLandingPage from '../img/LandingPage.jpg';
 
 export default function LandingPage(){
     return(
-        <div>
-            <h1>fiumba racatumba</h1>
+        <div class="landing-box">
+            <h1>¡Bienvenidx a pokeid.!</h1>
             <Link to = '/home'>
-                <button>aaaa</button>
+                <button>Ingresar</button>
             </Link>
+            <img src={imgLandingPage} alt="imagen de inicio" />
         </div>
     )
 }
