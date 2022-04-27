@@ -49,7 +49,7 @@ const getAllPokemons = async () => {
 
 
 router.get('/pokemons', async (req, res) => {
-    const {name} = req.query;
+    const {name} = req.query; 
     let pokemonsTotal = await getAllPokemons();
     if(name){ //si hay un query
         let pokemonName = await pokemonsTotal.filter(el => el.name.toLowerCase().includes(name.toLowerCase())); //por si hay una busca en mayuscula, 
@@ -79,7 +79,7 @@ router.get('/types', async (req, res) => {
 });
 
 router.get('/pokemons/:id', async (req, res) => {
-    const id = parseInt(req.params.id); 
+    const id = req.params.id; 
     const pokemonsTotal = await getAllPokemons();
     if(id){
         const pokemonId = pokemonsTotal.filter(el => el.id === id)

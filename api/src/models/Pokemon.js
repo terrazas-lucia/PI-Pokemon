@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
             },
             createdInDb: { 
                 type: DataTypes.BOOLEAN,
-                defaultValue: false,
+                defaultValue: true,
             },
             name: {
                 type: DataTypes.STRING,
@@ -53,6 +53,7 @@ module.exports = (sequelize) => {
         },
         {
             timestamps: false,
+            freezeTableName: true 
         }
     );
 };
