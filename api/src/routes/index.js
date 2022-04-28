@@ -52,8 +52,15 @@ router.get('/pokemons', async (req, res) => {
     const {name} = req.query; 
     let pokemonsTotal = await getAllPokemons();
     if(name){ //si hay un query
-        let pokemonName = await pokemonsTotal.filter(el => el.name.toLowerCase().includes(name.toLowerCase())); //por si hay una busca en mayuscula, 
-        pokemonName.length ? res.status(200).send(pokemonName) : res.status(404).send("no se encontro el pokemon");
+        let pokemonName = pokemonsTotal.filter(el => el.name.toLowerCase() === name.toLowerCase()); //por si hay una busca en mayuscula, 
+        if(pokemonName?.length){
+            return res.status(200).send(pokemonName)
+        } 
+        let pokemonDb = await Pokemon.findOne({where: {name}})
+        if(pokemonDb){
+            return res.status(200).send(pokemonDb);
+        } 
+        return res.status(404).json({msg: "No se encontro el Pokemon :("});
     } else {
         res.status(200).send(pokemonsTotal);
     }
@@ -82,7 +89,7 @@ router.get('/pokemons/:id', async (req, res) => {
     const id = req.params.id; 
     const pokemonsTotal = await getAllPokemons();
     if(id){
-        const pokemonId = pokemonsTotal.filter(el => el.id === id)
+        const pokemonId = pokemonsTotal.filter(el => el.id == id)
         pokemonId.length ? res.status(200).json(pokemonId) : res.status(404).send("no se encontro el pokemon");
     }
 })

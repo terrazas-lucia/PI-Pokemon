@@ -18,7 +18,9 @@
     font-family: "Inter", sans-serif;
     padding: 1px;
 }
-
+.detail-box img{
+    display: inline-flex;
+}
 .detail-box button{
     background-color:pink ;
     border: 0;

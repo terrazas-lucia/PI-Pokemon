@@ -8,19 +8,32 @@ import './styles/Detail.css';
 export default function Detail(props){
     const dispatch = useDispatch()
     const myPokemon = useSelector((state) => state.detail);
+    
 
     useEffect(() => {
         dispatch(getDetail(props.match.params.id));
+
         return() => dispatch(clearPokemons());
     }, [dispatch]);
     
+    console.log("mypokemon detail", myPokemon)
     return(
-        <div class='detail-box'>
+        <div className='detail-box'>
             {myPokemon.hasOwnProperty("id") ? 
             <div>
                 <h1>{myPokemon.name}</h1>
-                <img src={myPokemon.img} alt="pokemon" />
-                {myPokemon.type.map((type) => <h3>{type}</h3>)}
+                <img src={myPokemon.img} alt="pokemon" style={{width: "96px", height: "96px"}}/>
+                { myPokemon?.createdInDb ? 
+                myPokemon.types?.map((type, i) => {
+                    return(
+                      <h3 key={i}>{type.name}</h3>  
+                    )
+                }) :
+                myPokemon.type?.map((type, i) => {
+                    return(
+                      <h3 key={i}>{type}</h3>  
+                    )
+                })}
                 <h4>Vida: {myPokemon.life}</h4>
                 <h4>Fuerza: {myPokemon.strength}</h4>
                 <h4>Defensa: {myPokemon.defense}</h4>

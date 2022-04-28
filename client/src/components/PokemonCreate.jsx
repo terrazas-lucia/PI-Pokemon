@@ -146,6 +146,11 @@ export default function PokemonCreate(){
 
     function handleSelect(e){
         e.preventDefault();
+        if(input.type.length === 2){
+            return
+        } if (input.type.includes(e.target.value)){
+            return
+        }
         setInput({
             ...input,
             type:[...input.type, e.target.value]
@@ -154,8 +159,13 @@ export default function PokemonCreate(){
 
     function handleSubmit(e){
         e.preventDefault();
+        if(!input.type.length){
+            setErrors({...errors, type: 'Por favor, elija uno o dos tipos.'})
+            return
+        } 
+
         dispatch(postPokemon(input));
-        alert("kokemon creado rey");
+        alert("¡Pokemon creado!");
         setInput({
             name: "",
             life: "",
@@ -181,9 +191,9 @@ export default function PokemonCreate(){
     }, [dispatch]);
 
     return(
-        <div class='create-box'>
+        <div className='create-box'>
             <h1>¡Crea tu propio pokemon!</h1>
-            <div class='create-form'>
+            <div className='create-form'>
                 <form onSubmit={e => {handleSubmit(e)}}>
                     <div>
                         <label>Nombre:</label>
@@ -238,10 +248,11 @@ export default function PokemonCreate(){
                             )
                         })}
                     </select>
+                    {errors.type && (<p>{errors.type}</p>)}
                     <button type='submit'>¡Crear!</button>
                 </form>
                     {input.type.map(el =>
-                        <div class='type-x'> 
+                        <div className='type-x'> 
                             <p>{el}</p>
                             <button onClick={() => handleDelete(el)}>X</button>
                         </div> 

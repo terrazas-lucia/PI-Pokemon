@@ -13,10 +13,12 @@ export default function Home(){
     const dispatch = useDispatch();
     const allPokemons = useSelector((state) => state.pokemons);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pokemonsPerPage, /* setPokemonsPerPage */] = useState(12);
+    const pokemonsPerPage = 12;
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage; 
     const currentPokemon = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+    const [filterPokemon, setFilterPokemon] = useState(currentPokemon);
+    const error = useSelector((state) => state.error);
 
     const pagination = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -40,15 +42,19 @@ export default function Home(){
         dispatch(orderByStrength(e.target.value));
         setCurrentPage(1);
     }
+    
+    const handleOnClick = ()=> {
+        dispatch(getPokemons());
+    }
 
     return(
-        <div class="home-box">
+        <div className="home-box">
             <nav>
-                <Link to ='/home'><h1> pokeid. </h1></Link>
+                <div onClick={handleOnClick}><h1> pokeid. </h1></div>
                 <SearchBar/>
                 <Link to = '/pokemons'><button class="button-create">¡Crea tu propio pokemon!</button></Link>
                 </nav>
-                <div class="filter">
+                <div className="filter">
                     <h4>Filtrar por: </h4>
                     <div>
                         <select onChange={e => handleFilterByCreated(e)}>
@@ -71,9 +77,10 @@ export default function Home(){
                         </select>
                     </div>
                 </div>
-            { currentPokemon?.map( el => { //se trae el estado global y pregunta si existe y lo mapea y se lo pasa a la card
+            {  error?.length ? <p> {error} </p> : 
+            currentPokemon?.map((el, i) => { //se trae el estado global y pregunta si existe y lo mapea y se lo pasa a la card
                 return(
-                    <Card id={el.id} name={el.name} img={el.img} type={el.type}/>
+                    <Card key={i} id={el.id} name={el.name} img={el.img} type={el.type}/>
                 )
             })}
             <Pagination pokemonsPerPage={ pokemonsPerPage } allPokemons={ allPokemons.length } pagination={ pagination }/>

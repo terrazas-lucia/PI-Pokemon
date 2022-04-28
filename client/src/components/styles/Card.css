@@ -25,4 +25,6 @@
     margin: auto;
     display: inline-block;
     justify-content: center;
+    height: 96px;
+    width: 96px;
 }

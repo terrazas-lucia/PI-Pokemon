@@ -5,7 +5,7 @@ import imgLandingPage from '../img/LandingPage.jpg';
 
 export default function LandingPage(){
     return(
-        <div class="landing-box">
+        <div className="landing-box">
             <h1>¡Bienvenidx a pokeid.!</h1>
             <Link to = '/home'>
                 <button>Ingresar</button>

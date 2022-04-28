@@ -2,7 +2,8 @@ const initialState = {
     pokemons : [],
     allPokemons: [],
     detail: {},
-    types: []
+    types: [],
+    error: ""
 }
 
 function rootReducer(state= initialState, action){
@@ -11,7 +12,8 @@ function rootReducer(state= initialState, action){
             return{
                 ...state,
                 pokemons:action.payload, 
-                allPokemons:action.payload
+                allPokemons:action.payload,
+                error: ""
             }
         case 'FILTER_BY_CREATED':
             const allPokemons = state.allPokemons;
@@ -38,7 +40,7 @@ function rootReducer(state= initialState, action){
             })
             return{
                 ...state,
-                pokemons:sortedArr
+                pokemons: [...sortedArr]
             }
         case 'ORDER_BY_STRENGTH':
             let sortedArrStrength = action.payload === 'weakest' ? state.pokemons.sort(function(a, b){
@@ -58,22 +60,25 @@ function rootReducer(state= initialState, action){
             })
             return{
                 ...state,
-                pokemons:sortedArrStrength
+                pokemons:[...sortedArrStrength]
             }
         case 'GET_NAME':
             return{
                 ...state,
-                pokemons:action.payload
+                pokemons:action.payload,
+                error: ""
             }
         case 'GET_TYPE':
             return{
                 ...state,
-                types:action.payload
+                types:action.payload,
+                error: ""
             }
         case 'GET_DETAIL':
             return{
                 ...state,
-                detail: action.payload
+                detail: action.payload,
+                error: ""
             }
         case 'CLEAR_DETAILS':
             return{
@@ -83,6 +88,11 @@ function rootReducer(state= initialState, action){
         case "POST_POKEMON":
             return{
                 ...state,
+            }
+        case "GET_ERROR":
+            return{
+                ...state,
+                error: action.payload
             }
         default:
             return state;
