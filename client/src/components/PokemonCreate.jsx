@@ -101,13 +101,13 @@ function validate(input){
         }
     }
 
-    if(!input.type){
-        errors.type = 'Por favor, elija uno o dos tipos.'
+    if(!input.types){
+        errors.types = 'Por favor, elija uno o dos tipos.'
     }
 
-    if(input.type !== "undefined"){
-        if(input.type.length > 2){
-            errors.type = 'Solo se puede elegir dos tipos.'
+    if(input.types !== "undefined"){
+        if(input.types.length > 2){
+            errors.types = 'Solo se puede elegir dos tipos.'
         }
     }
 
@@ -129,9 +129,9 @@ export default function PokemonCreate(){
         height:"",
         weight:"",
         img:"",
-        type: [],
+        types: [],
     })
-
+    console.log("typeselector", types);
     function handleChange(e){
         e.preventDefault();
         setInput({
@@ -146,21 +146,21 @@ export default function PokemonCreate(){
 
     function handleSelect(e){
         e.preventDefault();
-        if(input.type.length === 2){
+        if(input.types.length === 2){
             return
-        } if (input.type.includes(e.target.value)){
+        } if (input.types.includes(e.target.value)){
             return
         }
         setInput({
             ...input,
-            type:[...input.type, e.target.value]
+            types:[...input.types, e.target.value]
         })
     }
 
     function handleSubmit(e){
         e.preventDefault();
-        if(!input.type.length){
-            setErrors({...errors, type: 'Por favor, elija uno o dos tipos.'})
+        if(!input.types.length){
+            setErrors({...errors, types: 'Por favor, elija uno o dos tipos.'})
             return
         } 
 
@@ -176,13 +176,13 @@ export default function PokemonCreate(){
             height:"",
             weight:"",
             img:"",
-            type: [],
+            types: [],
         })
     }
     function handleDelete(el){
         setInput({
             ...input,
-            type: input.type.filter(t => t !== el)
+            types: input.types.filter(t => t !== el)
         })
     }
 
@@ -190,7 +190,9 @@ export default function PokemonCreate(){
         dispatch(getTypes());
     }, [dispatch]);
 
+    console.log(input);
     return(
+        
         <div className='create-box'>
             <h1>¡Crea tu propio pokemon!</h1>
             <div className='create-form'>
@@ -242,16 +244,16 @@ export default function PokemonCreate(){
                     </div>
                     <label>Tipo:</label>
                     <select onChange={e => {handleSelect(e)}}>
-                        {types.map((t) => {
+                        {types.map((t, i) => {
                             return(
-                            <option value= {t.name} >{t.name}</option>
+                            <option key={i} value= {t.name} >{t.name}</option>
                             )
                         })}
                     </select>
-                    {errors.type && (<p>{errors.type}</p>)}
+                    {errors.types && (<p>{errors.types}</p>)}
                     <button type='submit'>¡Crear!</button>
                 </form>
-                    {input.type.map(el =>
+                    {input.types?.map(el =>
                         <div className='type-x'> 
                             <p>{el}</p>
                             <button onClick={() => handleDelete(el)}>X</button>

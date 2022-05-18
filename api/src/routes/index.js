@@ -15,7 +15,7 @@ const getApiInfo = async () => {
          return {
             id: el.data.id,
             name: el.data.name,
-            type: el.data.types.length < 2 ? [el.data.types[0].type.name] : [el.data.types[0].type.name, el.data.types[1].type.name],
+            types: el.data.types.length < 2 ? [el.data.types[0].type.name] : [el.data.types[0].type.name, el.data.types[1].type.name],
             life: el.data.stats[0].base_stat,
             strength: el.data.stats[1].base_stat,
             defense: el.data.stats[2].base_stat,
@@ -58,7 +58,7 @@ router.get('/pokemons', async (req, res) => {
         } 
         let pokemonDb = await Pokemon.findOne({where: {name}})
         if(pokemonDb){
-            return res.status(200).send(pokemonDb);
+            return res.status(200).json({...pokemonDb, type: pokemonDb.types});
         } 
         return res.status(404).json({msg: "No se encontro el Pokemon :("});
     } else {
@@ -95,14 +95,17 @@ router.get('/pokemons/:id', async (req, res) => {
 })
 
 router.post('/pokemons', async (req, res) => {
-    const { id, createdInDb, name, life, strength, defense, speed, height, weight, img, type } = req.body //lo busca en el body
-    const pokemonCreated = await Pokemon.create({ //lo crea en el modelo
-        id, createdInDb, name, life, strength, defense, speed, height, weight, img, type
+    const { createdInDb, name, life, strength, defense, speed, height, weight, img, types } = req.body //lo busca en el body
+    const [pokemonCreated] = await Pokemon.findOrCreate({ //lo crea en el modelo
+         createdInDb, name, life, strength, defense, speed, height, weight, img, types
     })
 
-    const typeInDb = await Type.findAll({ //busca en el type si hay algun name q coincida con el type del body para asignarselo
-        where: { name : type }
-    })
+ /*    const typeInDb = await Type.findAll({ //busca en el type si hay algun name q coincida con el type del body para asignarselo
+        where: { name : types }
+    }) */
+
+    const typeInDb = await Promise.all(types.map( async(type) => await Type.findOne({ where: {name: type}})));
+    console.log("nose", typeInDb)
 
     pokemonCreated.addType(typeInDb) //le agrega el type al pokemon creado
     res.send('personaje creado con exito') 

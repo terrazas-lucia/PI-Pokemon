@@ -35,6 +35,7 @@ export function getNamePokemons(payload){
     return async function(dispatch){
       try {
           var json = await axios.get("http://localhost:3001/pokemons?name=" + payload);
+          console.log("ruta getnamepokemon",json);
           if(!json.data.length){
             dispatch({
                 type: 'GET_ERROR',

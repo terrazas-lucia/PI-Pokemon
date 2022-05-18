@@ -79,8 +79,10 @@ export default function Home(){
                 </div>
             {  error?.length ? <p> {error} </p> : 
             currentPokemon?.map((el, i) => { //se trae el estado global y pregunta si existe y lo mapea y se lo pasa a la card
+                console.log(el);
                 return(
-                    <Card key={i} id={el.id} name={el.name} img={el.img} type={el.type}/>
+
+                    <Card key={i} id={el.id} name={el.name} img={el.img} types={el.types} />
                 )
             })}
             <Pagination pokemonsPerPage={ pokemonsPerPage } allPokemons={ allPokemons.length } pagination={ pagination }/>

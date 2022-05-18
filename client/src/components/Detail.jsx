@@ -23,13 +23,16 @@ export default function Detail(props){
             <div>
                 <h1>{myPokemon.name}</h1>
                 <img src={myPokemon.img} alt="pokemon" style={{width: "96px", height: "96px"}}/>
-                { myPokemon?.createdInDb ? 
+               
+                { /* 
+                
+                myPokemon?.createdInDb ? 
                 myPokemon.types?.map((type, i) => {
                     return(
                       <h3 key={i}>{type.name}</h3>  
                     )
-                }) :
-                myPokemon.type?.map((type, i) => {
+                }) : */
+                myPokemon.types?.map((type, i) => {
                     return(
                       <h3 key={i}>{type}</h3>  
                     )
